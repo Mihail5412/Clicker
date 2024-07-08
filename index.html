@@ -101,19 +101,27 @@
       }).then((unityInstance) => {
         loadingBar.style.display = "none";
 
-                // Получение данных пользователя из Telegram Web App
-                const user = Telegram.WebApp.initDataUnsafe.user;
-        if (user) {
-          logDebugMessage('User data retrieved from Telegram: ' + JSON.stringify(user));
-          const userData = {
-            firstName: user.first_name,
-            lastName: user.last_name,
-            userName: user.username,
-            userId: user.id.toString()
-          };
-          logDebugMessage('Sending user data to Unity: ' + JSON.stringify(userData));
-          // Отправка данных пользователя в Unity
-          unityInstance.SendMessage('UserDataSystem', 'CollectUserData', JSON.stringify(userData));
+        // Убедимся, что Unity инстанс готов
+        unityInstance.Module.onRuntimeInitialized = () => {
+          logDebugMessage('Unity instance initialized.');
+
+          // Получение данных пользователя из Telegram Web App
+          const user = Telegram.WebApp.initDataUnsafe.user;
+          if (user) {
+            logDebugMessage('User data retrieved from Telegram: ' + JSON.stringify(user));
+            const userData = {
+              firstName: user.first_name,
+              lastName: user.last_name,
+              userName: user.username,
+              userId: user.id.toString()
+            };
+            logDebugMessage('Sending user data to Unity: ' + JSON.stringify(userData));
+            // Отправка данных пользователя в Unity
+            unityInstance.SendMessage('UserDataSystem', 'CollectUserData', JSON.stringify(userData));
+          } else {
+            logDebugMessage('No user data available from Telegram.');
+          }
+        };
 
         fullscreenButton.onclick = () => {
           unityInstance.SetFullscreen(1);
