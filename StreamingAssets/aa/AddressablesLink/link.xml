@@ -4,6 +4,8 @@
     <type fullname="CatTitans.Chapters.UI.ChaptersBar" preserve="all" />
     <type fullname="CatTitans.Enemies.MVC.EnemyBarView" preserve="all" />
     <type fullname="CatTitans.Enemies.UI.EnemyWindow" preserve="all" />
+    <type fullname="CatTitans.Storage.UserData.MVC.UserDataView" preserve="all" />
+    <type fullname="CatTitans.Storage.UserData.Window.UserDataWindow" preserve="all" />
   </assembly>
   <assembly fullname="Unity.Addressables, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null" preserve="all">
     <type fullname="UnityEngine.AddressableAssets.Addressables" preserve="all" />
