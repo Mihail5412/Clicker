@@ -102,6 +102,15 @@
       loadingBar.style.display = "block";
 
       Telegram.WebApp.ready();
+      const user = Telegram.WebApp.initDataUnsafe.user;
+          if (user) {
+            const userData = {
+              firstName: user.first_name,
+              lastName: user.last_name,
+              userName: user.username,
+              userId: user.id.toString()
+            };
+          }
 
       var script = document.createElement("script");
       script.src = loaderUrl;
@@ -110,18 +119,7 @@
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
                 loadingBar.style.display = "none";
-                
-                const user = Telegram.WebApp.initDataUnsafe.user;
-          if (user) {
-            const userData = {
-              firstName: user.first_name,
-              lastName: user.last_name,
-              userName: user.username,
-              userId: user.id.toString()
-            };
-            unityInstance.SendMessage('UserDataSystem', 'CollectUserData', JSON.stringify(userData));
-          }
-
+                unityInstance.SendMessage('UserDataSystem', 'CollectUserData', JSON.stringify(userData));
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
                 };
