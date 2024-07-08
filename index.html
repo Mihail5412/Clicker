@@ -106,6 +106,20 @@
         createUnityInstance(canvas, config, (progress) => {
           progressBarFull.style.width = 100 * progress + "%";
               }).then((unityInstance) => {
+
+          Telegram.WebApp.ready();
+          
+          const user = Telegram.WebApp.initDataUnsafe.user;
+          if (user) {
+            const userData = {
+              firstName: user.first_name,
+              lastName: user.last_name,
+              userName: user.username,
+              userId: user.id.toString()
+            };
+            unityInstance.SendMessage('UserDataSystem', 'CollectUserData', JSON.stringify(userData));
+          }
+
                 loadingBar.style.display = "none";
                 fullscreenButton.onclick = () => {
                   unityInstance.SetFullscreen(1);
