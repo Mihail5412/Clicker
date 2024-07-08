@@ -101,11 +101,9 @@
       }).then((unityInstance) => {
         loadingBar.style.display = "none";
 
-        // Убедимся, что Unity инстанс готов
-        unityInstance.Module.onRuntimeInitialized = () => {
+          unityInstance.Module.onRuntimeInitialized = () => {
           logDebugMessage('Unity instance initialized.');
 
-          // Получение данных пользователя из Telegram Web App
           const user = Telegram.WebApp.initDataUnsafe.user;
           if (user) {
             logDebugMessage('User data retrieved from Telegram: ' + JSON.stringify(user));
@@ -116,19 +114,12 @@
               userId: user.id.toString()
             };
             logDebugMessage('Sending user data to Unity: ' + JSON.stringify(userData));
-            // Отправка данных пользователя в Unity
+
             unityInstance.SendMessage('UserDataSystem', 'CollectUserData', JSON.stringify(userData));
           } else {
             logDebugMessage('No user data available from Telegram.');
           }
         };
-
-        fullscreenButton.onclick = () => {
-          unityInstance.SetFullscreen(1);
-        };
-        } else {
-          logDebugMessage('No user data available from Telegram.');
-        }
 
       }).catch((message) => {
         logDebugMessage('Unity instance creation failed: ' + message);
