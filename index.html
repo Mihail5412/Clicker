@@ -113,7 +113,7 @@
           };
           logDebugMessage('Sending user data to Unity: ' + JSON.stringify(userData));
           // Отправка данных пользователя в Unity
-          unityInstance.SendMessage('UserDataSystem', 'CollectUserData', JSON.stringify(userData));
+          unityInstance.SendMessage('UserDataSystem', 'CollectUserData', userData);
 
         fullscreenButton.onclick = () => {
           unityInstance.SetFullscreen(1);
