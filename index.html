@@ -103,15 +103,13 @@
 
       Telegram.WebApp.ready();
       const user = Telegram.WebApp.initDataUnsafe.user;
-          if (user) {
-            const userData = {
+      const userData = {
               firstName: user.first_name,
               lastName: user.last_name,
               userName: user.username,
               userId: user.id.toString()
             };
-          }
-
+            
       var script = document.createElement("script");
       script.src = loaderUrl;
       script.onload = () => {
