@@ -100,6 +100,10 @@
         buttonRootId: 'ton-connect'
     });
 
+    tonConnectUI.uiOptions = {
+      twaReturnUrl: 'https://t.me/cats_titans_bot'
+  };
+
     async function connectToWallet() {
         const connectedWallet = await tonConnectUI.connectWallet();
         // Do something with connectedWallet if needed
@@ -121,7 +125,7 @@
         fullscreenButton.onclick = () => {
           unityInstance.SetFullscreen(1);
         };
-
+        
         // Define the function that will be called by Unity
         window.onUnityReady = function() {
           logDebugMessage('Unity instance initialized and scene loaded.');
