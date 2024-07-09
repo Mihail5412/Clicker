@@ -106,8 +106,7 @@
 
     async function connectToWallet() {
         const connectedWallet = await tonConnectUI.connectWallet();
-        // Do something with connectedWallet if needed
-        logDebugMessage(connectedWallet);
+        logDebugMessage(JSON.stringify(connectedWallet));
     }
 
     // Call the function
